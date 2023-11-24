@@ -11,31 +11,43 @@ class DrugController extends Controller
 {
     public function index()
     {
-        $data = Drug::where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
+        $dateNow = now()->format('Y-m-d');
+        $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
+        $data = Drug::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
 
         $dataCount = [
             "clorhidrato" => [
-                'ton' => Drug::where('id_type_drug', 1)
+                'ton' => Drug::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                    ->where('id_type_drug', 1)
                     ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('ton'),
-                'kilogram' => Drug::where('id_type_drug', 1)
+                'kilogram' => Drug::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                    ->where('id_type_drug', 1)
                     ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('kilogram'),
-                'gram' => Drug::where('id_type_drug', 1)
+                'gram' => Drug::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                    ->where('id_type_drug', 1)
                     ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('gram'),
             ],
             "pbc" => [
-                'ton' => Drug::where('id_type_drug', 2)
+                'ton' => Drug::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                    ->where('id_type_drug', 2)
                     ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('ton'),
-                'kilogram' => Drug::where('id_type_drug', 2)
+                'kilogram' => Drug::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                    ->where('id_type_drug', 2)
                     ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('kilogram'),
-                'gram' => Drug::where('id_type_drug', 2)
+                'gram' => Drug::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                    ->where('id_type_drug', 2)
                     ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('gram'),
             ],
             "marihuana" => [
-                'ton' => Drug::where('id_type_drug', 3)
+                'ton' => Drug::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                    ->where('id_type_drug', 3)
                     ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('ton'),
-                'kilogram' => Drug::where('id_type_drug', 3)
+                'kilogram' => Drug::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                    ->where('id_type_drug', 3)
                     ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('kilogram'),
-                'gram' => Drug::where('id_type_drug', 3)
+                'gram' => Drug::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                    ->where('id_type_drug', 3)
                     ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('gram'),
             ],
         ];

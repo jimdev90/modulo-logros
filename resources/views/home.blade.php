@@ -11,7 +11,7 @@
                             <div class="card-header">
                                 <h3 class="text-center"> LOGROS DE INTELIGENCIA</h3>
                                 <div class="alert alert-danger">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad amet, autem distinctio dolor doloribus eaque eveniet fuga inventore ipsam nulla numquam odio placeat quis quo sequi sit, voluptate voluptatem.</p>
+                                    <h3 class="text-center">Este registro, sin errores, no excluye el registro obligatorio de los documentos de inteligencia en la PI3.</h3>
                                 </div>
                             </div>
                             <div class="card-body">

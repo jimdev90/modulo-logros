@@ -11,15 +11,22 @@ class OthersController extends Controller
 {
     public function index()
     {
-        $data = Other::where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
+        $dateNow = now()->format('Y-m-d');
+        $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
+        $data = Other::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
         $dataCount = [
-            "bienes_muebles_incautados" => Other::where('id_type_other', 1)
+            "bienes_muebles_incautados" => Other::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_other', 1)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "bienes_inmuebles_incautados" => Other::where('id_type_other', 2)
+            "bienes_inmuebles_incautados" => Other::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_other', 2)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "madera" => Other::where('id_type_other', 3)
+            "madera" => Other::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_other', 3)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "mercaderia_contrabando" => Other::where('id_type_other', 4)
+            "mercaderia_contrabando" => Other::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_other', 4)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
         ];
         $types = TypeOther::get();

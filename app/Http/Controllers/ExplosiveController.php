@@ -11,11 +11,16 @@ class ExplosiveController extends Controller
 {
     public function index()
     {
-        $data = Explosive::where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
+        $dateNow = now()->format('Y-m-d');
+        $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
+        $data = Explosive::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
         $dataCount = [
-            "dinamita" => Explosive::where('id_type_explosive', 1)
+            "dinamita" => Explosive::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_explosive', 1)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "artefacto_pirotecnico" => Explosive::where('id_type_explosive', 2)
+            "artefacto_pirotecnico" => Explosive::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_explosive', 2)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
         ];
         $types = TypeExplosive::get();

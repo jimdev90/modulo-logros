@@ -16,15 +16,23 @@
                                     </div>
                                     <div class="text-center">
                                         <button type="button" class="btn btn-outline-dark">
-                                            CLORHIDRATO CC. (Kg.) <span
-                                                class="badge bg-secondary"></span>
+                                            CLORHIDRATO CC. (Kg.)
+                                            <span class="badge bg-secondary">Toneladas: {{ $dataCount["clorhidrato"]["ton"] }}</span>
+                                            <span class="badge bg-primary">Kilogramos: {{ $dataCount["clorhidrato"]["kilogram"] }}</span>
+                                            <span class="badge bg-info">Gramos: {{ $dataCount["clorhidrato"]["gram"] }}</span>
+
                                         </button>
                                         <button type="button" class="btn btn-outline-dark">
-                                            PBC (Kg.) <span class="badge bg-secondary"></span>
+                                            PBC (Kg.)
+                                            <span class="badge bg-secondary">Toneladas: {{ $dataCount["pbc"]["ton"] }}</span>
+                                            <span class="badge bg-primary">Kilogramos: {{ $dataCount["pbc"]["kilogram"] }}</span>
+                                            <span class="badge bg-info">Gramos: {{ $dataCount["pbc"]["gram"] }}</span>
                                         </button>
                                         <button type="button" class="btn btn-outline-dark">
-                                            MARIHUANA (Kg.) <span
-                                                class="badge bg-secondary"></span>
+                                            MARIHUANA (Kg.)
+                                            <span class="badge bg-secondary">Toneladas: {{ $dataCount["marihuana"]["ton"] }}</span>
+                                            <span class="badge bg-primary">Kilogramos: {{ $dataCount["marihuana"]["kilogram"] }}</span>
+                                            <span class="badge bg-info">Gramos: {{ $dataCount["marihuana"]["gram"] }}</span>
                                         </button>
                                     </div>
                                 </div>

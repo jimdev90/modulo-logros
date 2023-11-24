@@ -11,23 +11,34 @@ class FireArmsController extends Controller
 {
     public function index()
     {
-        $data = FireArm::where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
+        $dateNow = now()->format('Y-m-d');
+        $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
+        $data = FireArm::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
         $dataCount = [
-            "pistola" => FireArm::where('id_type_firearm', 1)
+            "pistola" => FireArm::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_firearm', 1)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "revolver" => FireArm::where('id_type_firearm', 2)
+            "revolver" => FireArm::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_firearm', 2)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "fusiles" => FireArm::where('id_type_firearm', 3)
+            "fusiles" => FireArm::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_firearm', 3)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "granadas" => FireArm::where('id_type_firearm', 4)
+            "granadas" => FireArm::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_firearm', 4)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "carabinas" => FireArm::where('id_type_firearm', 5)
+            "carabinas" => FireArm::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_firearm', 5)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "carabinas_mr15" => FireArm::where('id_type_firearm', 6)
+            "carabinas_mr15" => FireArm::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_firearm', 6)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "armas_artesanales" => FireArm::where('id_type_firearm', 7)
+            "armas_artesanales" => FireArm::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_firearm', 7)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "municion_incautada" => FireArm::where('id_type_firearm', 8)
+            "municion_incautada" => FireArm::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_firearm', 8)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
         ];
         $types = TypeFireArm::get();

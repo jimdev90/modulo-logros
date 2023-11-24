@@ -11,11 +11,16 @@ class FuelController extends Controller
 {
     public function index()
     {
-        $data = Fuel::where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
+        $dateNow = now()->format('Y-m-d');
+        $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
+        $data = Fuel::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
         $dataCount = [
-            "petroleo" => Fuel::where('id_type_fuel', 1)
+            "petroleo" => Fuel::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_fuel', 1)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "gasolina" => Fuel::where('id_type_fuel', 2)
+            "gasolina" => Fuel::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_fuel', 2)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
         ];
         $types = TypeFuel::get();

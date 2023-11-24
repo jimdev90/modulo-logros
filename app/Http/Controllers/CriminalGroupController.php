@@ -11,12 +11,18 @@ class CriminalGroupController extends Controller
 {
     public function index()
     {
-        $data = CriminalGroup::where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
+        $dateNow = now()->format('Y-m-d');
+        $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
+        $data = CriminalGroup::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
+
         $dataCount = [
-            "organizacion_criminal" => CriminalGroup::where('id_type_criminal_group', 1)
-                                        ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "banda_criminal" => CriminalGroup::where('id_type_criminal_group', 2)
-                                        ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
+            "organizacion_criminal" => CriminalGroup::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_criminal_group', 1)
+                ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
+            "banda_criminal" => CriminalGroup::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+                ->where('id_type_criminal_group', 2)
+                ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
         ];
         $types = TypeCriminalGroup::get();
         return view('logros.criminal-groups', compact('data', 'dataCount', 'types'));
@@ -26,7 +32,7 @@ class CriminalGroupController extends Controller
     {
         $request->validate([
             'id_type_criminal_group' => ['required', Rule::exists('types_criminal_group', 'id')],
-            'quantity'  => ['required', 'numeric', 'min:1'],
+            'quantity' => ['required', 'numeric', 'min:1'],
         ]);
 
         CriminalGroup::create([
