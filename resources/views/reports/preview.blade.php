@@ -15,12 +15,16 @@
                                         <h5>Fecha: {{ $date }}</h5>
                                         <form action="{{ route('report.export') }}" method="post" >
                                             @csrf
+                                            <input type="hidden" name="date" value="{{ $date }}" >
+                                            <input type="hidden" name="date_next" value="{{ $dateNext }}" >
+                                            <input type="hidden" name="id_unidad" value="{{ $id_unidad }}" >
                                             <button class="btn btn-outline-info">Descargar</button>
                                         </form>
 
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    {{--GRUPOS DELICTIVOS ORGANIZADOS--}}
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">GRUPOS DELICTIVOS ORGANIZADOS</h5>
@@ -39,18 +43,9 @@
                                                 <tbody>
                                                 @php
                                                     $i = 1;
-                                                    $orgCriminalCount = 0;
-                                                    $bandaCriminalCount = 0;
                                                 @endphp
 
                                                 @forelse($criminalGroups as $criminalGroup)
-                                                    @php
-                                                        if ($criminalGroup->id_type_criminal_group == 1){
-                                                            $orgCriminalCount += $criminalGroup->quantity;
-                                                        }elseif ($criminalGroup->id_type_criminal_group == 2){
-                                                            $bandaCriminalCount += $criminalGroup->quantity;
-                                                        }
-                                                    @endphp
                                                     <tr>
                                                         <th scope="row">{{ $i++ }}</th>
                                                         <td>{{ $criminalGroup->type_criminal_group->name }}</td>
@@ -75,19 +70,17 @@
 
                                                 </tbody>
                                                 <tfoot>
-                                                    <tr>
-                                                        <th>ORGANIZACIÓN CRIMINAL</th>
-                                                        <th colspan="2">{{ $dataCountCriminalGroups["organizacion_criminal"] }}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>BANDA CRIMINAL</th>
-                                                        <th colspan="2">{{ $dataCountCriminalGroups["banda_criminal"] }}</th>
-                                                    </tr>
+                                                    @foreach($dataCountCriminalGroups as $dcg)
+                                                        <tr>
+                                                            <th>{{ $dcg->category }}</th>
+                                                            <th>TOTAL : {{ $dcg->total }}</th>
+                                                        </tr>
+                                                    @endforeach
                                                 </tfoot>
                                             </table>
                                         </div>
                                     </div>
-
+                                    {{--PERSONAS--}}
                                     <div class="card mt-2">
                                         <div class="card-body">
                                             <h5 class="card-title">PERSONAS</h5>
@@ -131,35 +124,17 @@
 
                                                 </tbody>
                                                 <tfoot>
-                                                <tr>
-                                                    <th>DETENIDOS EXTRANJEROS</th>
-                                                    <th colspan="2">{{ $dataCountPersons["detenidos_extranjero"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>DETENIDOS NACIONALES</th>
-                                                    <th colspan="2">{{ $dataCountPersons["detenidos_nacional"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>DETENIDOS (TERRORISMO)</th>
-                                                    <th colspan="2">{{ $dataCountPersons["detenidos_terrorismo"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>DETENIDOS (TID)</th>
-                                                    <th colspan="2">{{ $dataCountPersons["detenidos_tid"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>CAPTURADOS POR REQUISITORIA (RQ)</th>
-                                                    <th colspan="2">{{ $dataCountPersons["capturas_rq"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>MENORES RETENIDOS</th>
-                                                    <th colspan="2">{{ $dataCountPersons["menores_retenidos"] }}</th>
-                                                </tr>
+                                                @foreach($dataCountPersons as $dcp)
+                                                    <tr>
+                                                        <th>{{ $dcp->category }}</th>
+                                                        <th>TOTAL : {{ $dcp->total }}</th>
+                                                    </tr>
+                                                @endforeach
                                                 </tfoot>
                                             </table>
                                         </div>
                                     </div>
-
+                                    {{--COMBUSTIBLE--}}
                                     <div class="card mt-2">
                                         <div class="card-body">
                                             <h5 class="card-title">COMBUSTIBLE</h5>
@@ -206,19 +181,17 @@
 
                                                 </tbody>
                                                 <tfoot>
-                                                <tr>
-                                                    <th>PETROLEO</th>
-                                                    <th colspan="2">{{ $dataCountFuels["petroleo"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>GASOLINA</th>
-                                                    <th colspan="2">{{ $dataCountFuels["gasolina"] }}</th>
-                                                </tr>
+                                                @foreach($dataCountFuels as $dcf)
+                                                    <tr>
+                                                        <th>{{ $dcf->category }}</th>
+                                                        <th>TOTAL : {{ $dcf->total }}</th>
+                                                    </tr>
+                                                @endforeach
                                                 </tfoot>
                                             </table>
                                         </div>
                                     </div>
-
+                                    {{--MONEDA NACIONAL Y EXTRANJERA--}}
                                     <div class="card mt-2">
                                         <div class="card-body">
                                             <h5 class="card-title">MONEDA NACIONAL Y EXTRANJERA</h5>
@@ -265,27 +238,17 @@
 
                                                 </tbody>
                                                 <tfoot>
-                                                <tr>
-                                                    <th>SOLES</th>
-                                                    <th colspan="2">{{ $dataCountCurrencies["nuevos_soles"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>DÓLARES</th>
-                                                    <th colspan="2">{{ $dataCountCurrencies["dolares"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>EUROS</th>
-                                                    <th colspan="2">{{ $dataCountCurrencies["euros"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>PESOS</th>
-                                                    <th colspan="2">{{ $dataCountCurrencies["pesos"] }}</th>
-                                                </tr>
+                                                @foreach($dataCountCurrencies as $dcc)
+                                                    <tr>
+                                                        <th>{{ $dcc->category }}</th>
+                                                        <th>TOTAL : {{ $dcc->total }}</th>
+                                                    </tr>
+                                                @endforeach
                                                 </tfoot>
                                             </table>
                                         </div>
                                     </div>
-
+                                    {{--ARMAS DE FUEGO O DE GUERRA INCAUTADAS--}}
                                     <div class="card mt-2">
                                         <div class="card-body">
                                             <h5 class="card-title">ARMAS DE FUEGO O DE GUERRA INCAUTADAS</h5>
@@ -329,43 +292,17 @@
 
                                                 </tbody>
                                                 <tfoot>
-                                                <tr>
-                                                    <th>SOLES</th>
-                                                    <th colspan="2">{{ $dataCountFireArms["pistola"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>REVOLVER</th>
-                                                    <th colspan="2">{{ $dataCountFireArms["revolver"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>FUSILES</th>
-                                                    <th colspan="2">{{ $dataCountFireArms["fusiles"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>GRANADAS</th>
-                                                    <th colspan="2">{{ $dataCountFireArms["granadas"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>CARABINAS</th>
-                                                    <th colspan="2">{{ $dataCountFireArms["carabinas"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>CARABINAS R15</th>
-                                                    <th colspan="2">{{ $dataCountFireArms["carabinas_mr15"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>ARMAS ARTESANALES</th>
-                                                    <th colspan="2">{{ $dataCountFireArms["armas_artesanales"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>MUNICION INCAUTADA</th>
-                                                    <th colspan="2">{{ $dataCountFireArms["municion_incautada"] }}</th>
-                                                </tr>
+                                                @foreach($dataCountFireArms as $dcfa)
+                                                    <tr>
+                                                        <th>{{ $dcfa->category }}</th>
+                                                        <th>TOTAL : {{ $dcfa->total }}</th>
+                                                    </tr>
+                                                @endforeach
                                                 </tfoot>
                                             </table>
                                         </div>
                                     </div>
-
+                                    {{--EXPLOSIVOS--}}
                                     <div class="card mt-2">
                                         <div class="card-body">
                                             <h5 class="card-title">EXPLOSIVOS</h5>
@@ -409,19 +346,17 @@
 
                                                 </tbody>
                                                 <tfoot>
-                                                <tr>
-                                                    <th>DINAMITA</th>
-                                                    <th colspan="2">{{ $dataCountExplosives["dinamita"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>ARTEFACTOS PIROTÉCNICOS</th>
-                                                    <th colspan="2">{{ $dataCountExplosives["artefacto_pirotecnico"] }}</th>
-                                                </tr>
+                                                @foreach($dataCountExplosives as $dce)
+                                                    <tr>
+                                                        <th>{{ $dce->category }}</th>
+                                                        <th>TOTAL : {{ $dce->total }}</th>
+                                                    </tr>
+                                                @endforeach
                                                 </tfoot>
                                             </table>
                                         </div>
                                     </div>
-
+                                    {{--OTROS--}}
                                     <div class="card mt-2">
                                         <div class="card-body">
                                             <h5 class="card-title">OTROS</h5>
@@ -468,22 +403,12 @@
 
                                                 </tbody>
                                                 <tfoot>
-                                                <tr>
-                                                    <th>BIENES MUEBLES INCAUTADOS</th>
-                                                    <th colspan="2">{{ $dataCountOthers["bienes_muebles_incautados"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>BIENES INMUEBLES INCAUTADOS</th>
-                                                    <th colspan="2">{{ $dataCountOthers["bienes_inmuebles_incautados"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>MADERA</th>
-                                                    <th colspan="2">{{ $dataCountOthers["madera"] }}</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>MERCADERIA DE CONTRABANDO</th>
-                                                    <th colspan="2">{{ $dataCountOthers["mercaderia_contrabando"] }}</th>
-                                                </tr>
+                                                @foreach($dataCountOthers as $dco)
+                                                    <tr>
+                                                        <th>{{ $dco->category }}</th>
+                                                        <th>TOTAL : {{ $dco->total }}</th>
+                                                    </tr>
+                                                @endforeach
                                                 </tfoot>
                                             </table>
                                         </div>
