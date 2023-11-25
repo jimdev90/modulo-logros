@@ -24,15 +24,15 @@ class HomeController extends Controller
         $timeNow = now()->format('H:i:s');
         if ($timeNow < '06:00:00'){
             $dateNow = date('Y-m-d', strtotime($dateNow . '- 1 days'));
+            $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
         }
         if ($timeNow >= '06:00:00'){
             $dateNow = now()->format('Y-m-d');
+            $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
         }
-
-        $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
         $unidadReporte = UnidadReporte::where('date_init', $dateNow. ' 06:00:00')
             ->where('date_finish', $dateNext. ' 05:59:59')
-            ->where('id_unidad', auth()->user()->unidad_usuario->id)->first();
+            ->where('id_unidad', auth()->user()->unidad_usuario->id_unidad)->first();
         return view('home', compact('dateNow', 'dateNext', 'unidadReporte'));
     }
 
