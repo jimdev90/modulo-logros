@@ -66,6 +66,23 @@ class PersonsController extends Controller
         return redirect()->back();
     }
 
+    public function edit(Person $data)
+    {
+        return view('logros.edit-item-person', compact('data'));
+    }
+
+    public function update(Request $request, Person $data)
+    {
+        $request->validate([
+            'quantity' => 'numeric'
+        ]);
+
+        $data->quantity = $request->quantity;
+        $data->save();
+
+        return redirect()->route('report.preview-general', ['date' => $data->date_create, 'type_report' => 'excel']);
+    }
+
     public function delete(Person $data)
     {
         $data->user_delete = auth()->user()->idusuarios;

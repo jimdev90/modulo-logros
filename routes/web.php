@@ -44,8 +44,14 @@ Route::group(['middleware' => ['auth', 'profile:99']], function () {
     Route::put('/users/inactive/{user}', [UnidadUserController::class, 'inactive'])->name('users.inactive');;
     Route::put('/users/active/{user}', [UnidadUserController::class, 'active'])->name('users.active');;
     Route::get('/reports', [ReportController::class, 'index'])->name('report.index');
+
+    Route::post('/process-report-general', [ReportController::class, 'processGeneral'])->name('process-report-general');
+
     Route::get('/reports/preview', [ReportController::class, 'preview'])->name('report.preview');
+    Route::get('/reports/preview-general/{date}/{type_report}', [ReportController::class, 'previewGeneral'])->name('report.preview-general');
+
     Route::post('/reports', [ReportController::class, 'export'])->name('report.export');
+    Route::post('/reports-general', [ReportController::class, 'exportGeneral'])->name('report.export-general');
 
 });
 
@@ -60,10 +66,15 @@ Route::group(['middleware' => ['auth', 'profile:1,99']], function () {
     Route::get('/register-criminal-groups', [CriminalGroupController::class, 'index'])->name('register-criminal-groups');
     Route::post('/register-criminal-groups', [CriminalGroupController::class, 'store'])->name('register-criminal-groups.store');
     Route::delete('/register-criminal-groups/{data}', [CriminalGroupController::class, 'delete'])->name('register-criminal-groups.delete');
+    Route::get('/edit-item-criminal-group/{data}', [CriminalGroupController::class, 'edit'])->name('edit-item-criminal-group');
+    Route::put('/edit-item-criminal-group/{data}', [CriminalGroupController::class, 'update'])->name('edit-item-criminal-group.put');
 
     Route::get('/register-persons', [PersonsController::class, 'index'])->name('register-persons');
     Route::post('/register-persons', [PersonsController::class, 'store'])->name('register-persons.store');
     Route::delete('/register-persons/{data}', [PersonsController::class, 'delete'])->name('register-persons.delete');
+    Route::get('/edit-item-person/{data}', [PersonsController::class, 'edit'])->name('edit-item-person');
+    Route::put('/edit-item-person/{data}', [PersonsController::class, 'update'])->name('edit-item-person.put');
+
 
 
     Route::get('/register-currencies', [CurrencyController::class, 'index'])->name('register-currencies');
@@ -74,6 +85,8 @@ Route::group(['middleware' => ['auth', 'profile:1,99']], function () {
     Route::get('/register-drugs', [DrugController::class, 'index'])->name('register-drugs');
     Route::post('/register-drugs', [DrugController::class, 'store'])->name('register-drugs.store');
     Route::delete('/register-drugs/{data}', [DrugController::class, 'delete'])->name('register-drugs.delete');
+    Route::get('/edit-item-drug/{data}', [DrugController::class, 'edit'])->name('edit-item-drug');
+    Route::put('/edit-item-drug/{data}', [DrugController::class, 'update'])->name('edit-item-drug.put');
 
 
     Route::get('/register-firearms', [FireArmsController::class, 'index'])->name('register-firearms');
@@ -88,6 +101,8 @@ Route::group(['middleware' => ['auth', 'profile:1,99']], function () {
     Route::get('/register-fuels', [FuelController::class, 'index'])->name('register-fuels');
     Route::post('/register-fuels', [FuelController::class, 'store'])->name('register-fuels.store');
     Route::delete('/register-fuels/{data}', [FuelController::class, 'delete'])->name('register-fuels.delete');
+    Route::get('/edit-item-fuel/{data}', [FuelController::class, 'edit'])->name('edit-item-fuel');
+    Route::put('/edit-item-fuel/{data}', [FuelController::class, 'update'])->name('edit-item-fuel.put');
 
 
     Route::get('/register-others', [OthersController::class, 'index'])->name('register-others');

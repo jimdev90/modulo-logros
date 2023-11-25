@@ -54,6 +54,24 @@ class FuelController extends Controller
         return redirect()->back();
     }
 
+    public function edit(Fuel $data)
+    {
+        return view('logros.edit-item-fuel', compact('data'));
+    }
+
+    public function update(Request $request, Fuel $data)
+    {
+        $data->quantity = $request->quantity;
+        $data->save();
+        $date = $data->date_create;
+        $timeNow = now()->format('H:i:s');
+        if ($timeNow < '06:00:00'){
+            $date = date('Y-m-d', strtotime($date . '- 1 days'));
+        }
+
+        return redirect()->route('report.preview-general', ['date' => $date, 'type_report' => 'excel']);
+    }
+
     public function delete(Fuel $data)
     {
         $data->user_delete = auth()->user()->idusuarios;

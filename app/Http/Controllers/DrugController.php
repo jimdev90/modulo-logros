@@ -86,6 +86,20 @@ class DrugController extends Controller
         return redirect()->back();
     }
 
+    public function edit(Drug $data)
+    {
+        return view('logros.edit-item-drug', compact('data'));
+    }
+
+    public function update(Request $request, Drug $data)
+    {
+        $data->ton = $request->ton;
+        $data->kilogram = $request->kilogram;
+        $data->gram = $request->gram;
+        $data->save();
+        return redirect()->route('report.preview-general', ['date' => $data->date_create, 'type_report' => 'excel']);
+    }
+
     public function delete(Drug $data)
     {
         $data->user_delete = auth()->user()->idusuarios;

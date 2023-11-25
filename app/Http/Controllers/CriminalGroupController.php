@@ -55,6 +55,22 @@ class CriminalGroupController extends Controller
         return redirect()->back();
     }
 
+    public function edit(CriminalGroup $data)
+    {
+        return view('logros.edit-item-criminal-group', compact('data'));
+    }
+
+    public function update(Request $request, CriminalGroup $data)
+    {
+        $request->validate([
+            "quantity" => "numeric"
+        ]);
+
+        $data->quantity = $request->quantity;
+        $data->save();
+        return redirect()->route('report.preview-general', ['date' => $data->date_create, 'type_report' => 'excel']);
+    }
+
     public function delete(CriminalGroup $data)
     {
         $data->user_delete = auth()->user()->idusuarios;

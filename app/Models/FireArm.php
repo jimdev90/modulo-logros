@@ -31,4 +31,11 @@ class FireArm extends Model
     {
         return $this->belongsTo(User::class, 'user_create', 'idusuarios');
     }
+
+    public function unidad()
+    {
+        return $this->belongsTo(Unidad::class, 'cod_uni1', 'id')->withDefault([
+            'name' => 'sin registros'
+        ]);
+    }
 }
