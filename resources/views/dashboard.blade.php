@@ -35,7 +35,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="alert alert-danger text-center">
-                                                <h3>Unidades con logros el día de hoy</h3>
+                                                <h3>Unidades sin logros el día de hoy</h3>
                                             </div>
                                             <div class="list-group">
                                                 @php
