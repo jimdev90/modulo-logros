@@ -19,6 +19,7 @@ class CreateUnidadesReportesTable extends Migration
             $table->dateTime('date_init');
             $table->dateTime('date_finish');
             $table->string('user_init');
+            $table->string('user_finish')->nullable();
             $table->char('status')->default('1');
             $table->timestamps();
             $table->softDeletes();

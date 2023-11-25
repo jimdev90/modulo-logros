@@ -44,6 +44,7 @@ class HomeController extends Controller
     {
         $unidadReporte = UnidadReporte::where('id', $request->id_unidad_reporte)->first();
         $unidadReporte->status = 2;
+        $unidadReporte->user_finish = auth()->user()->idusuarios;
         $unidadReporte->save();
         return redirect()->back();
     }

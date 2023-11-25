@@ -16,10 +16,16 @@ class UnidadReporte extends Model
         'date_init',
         'date_finish',
         'user_init',
+        'user_finish',
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_init', 'idusuarios');
+    }
+
+    public function unidad(): BelongsTo
+    {
+        return $this->belongsTo(Unidad::class, 'id_unidad', 'id');
     }
 }

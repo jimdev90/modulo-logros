@@ -18,7 +18,7 @@
                                         <p><strong>{{ $dateNow. ' 06:00:00' }} - {{ $dateNext . ' 05:59:59' }}</strong></p>
                                         <form action="{{ route('init-achievements.init-report') }}" method="post">
                                             @csrf
-                                            <input class="form-control" type="hidden" name="id_unidad" id="id_unidad" value="{{ auth()->user()->unidad_usuario->id }}">
+                                            <input class="form-control" type="hidden" name="id_unidad" id="id_unidad" value="{{ auth()->user()->unidad_usuario->id_unidad }}">
                                             <input class="form-control" type="hidden" name="date_now" id="date_now" value="{{ $dateNow . ' 06:00:00' }}">
                                             <input class="form-control" type="hidden" name="date_next" id="date_next" value="{{ $dateNext . ' 05:59:59' }}">
                                             <button type="submit" class="btn btn-success">
@@ -29,13 +29,13 @@
                                     @else
                                         @if($unidadReporte->status == "1")
                                             <div class="text-center">
-                                                <p>¿Tu unidad no obtuve ningún logro en el día?</p>
+                                                <h3>¿Tu unidad no obtuvo ningún logro en el día?</h3>
                                                 <p><strong>{{ $dateNow. ' 06:00:00' }} - {{ $dateNext . ' 05:59:59' }}</strong></p>
                                                 <form action="{{ route('init-achievements.finish-report') }}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="id_unidad_reporte" value="{{ $unidadReporte->id }}">
                                                     <button type="submit" class="btn btn-success">
-                                                        Finalizar reporte
+                                                        Finalizar reporte sin logros en el día
                                                     </button>
                                                 </form>
                                             </div>
