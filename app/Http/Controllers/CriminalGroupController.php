@@ -12,6 +12,13 @@ class CriminalGroupController extends Controller
     public function index()
     {
         $dateNow = now()->format('Y-m-d');
+        $timeNow = now()->format('H:i:s');
+        if ($timeNow < '06:00:00'){
+            $dateNow = date('Y-m-d', strtotime($dateNow . '- 1 days'));
+        }
+        if ($timeNow >= '06:00:00'){
+            $dateNow = now()->format('Y-m-d');
+        }
         $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
         $data = CriminalGroup::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
             ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
