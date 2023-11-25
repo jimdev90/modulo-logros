@@ -19,7 +19,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="alert alert-success text-center">
-                                                    <h3>Unidades con logros el día de hoy</h3>
+                                                    <h4>Unidades que se encuentran registrando sus logros el día de hoy</h4>
                                                 </div>
                                                 <div class="list-group">
                                                     @php
@@ -38,7 +38,7 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="alert alert-danger text-center">
-                                                    <h3>Unidades sin logros el día de hoy</h3>
+                                                    <h3>Unidades que finalizaron el registro sin logros el día de hoy</h3>
                                                 </div>
                                                 <div class="list-group">
                                                     @php
