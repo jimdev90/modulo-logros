@@ -1,5 +1,5 @@
 <h1>Nombre de la Unidad {{ $unidad->name }}</h1>
-<h4>Reporte de Logros de Inteligencia de fecha {{ $date }} 05:00:00 hasta el {{ $dateNext }} 04:59:59</h4>
+<h4>Reporte de Logros de Inteligencia de fecha {{ $date }} 06:00:00 hasta el {{ $dateNext }} 05:59:59</h4>
 <table class="table">
     <thead>
     <tr>
