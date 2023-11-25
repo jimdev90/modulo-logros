@@ -53,7 +53,9 @@ Route::group(['middleware' => ['auth', 'profile:1,99']], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [LoginCustomController::class, 'logout'])->name('logout');
-    Route::get('/create-achievements', [HomeController::class, 'index'])->name('create-achievements');
+    Route::get('/init-achievements', [HomeController::class, 'index'])->name('init-achievements');
+    Route::post('/init-achievements', [HomeController::class, 'initReport'])->name('init-achievements.init-report');
+    Route::post('/init-achievements/finish', [HomeController::class, 'finishReport'])->name('init-achievements.finish-report');
 
     Route::get('/register-criminal-groups', [CriminalGroupController::class, 'index'])->name('register-criminal-groups');
     Route::post('/register-criminal-groups', [CriminalGroupController::class, 'store'])->name('register-criminal-groups.store');

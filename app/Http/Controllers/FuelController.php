@@ -13,13 +13,13 @@ class FuelController extends Controller
     {
         $dateNow = now()->format('Y-m-d');
         $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
-        $data = Fuel::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+        $data = Fuel::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
             ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
         $dataCount = [
-            "petroleo" => Fuel::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            "petroleo" => Fuel::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
                 ->where('id_type_fuel', 1)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "gasolina" => Fuel::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            "gasolina" => Fuel::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
                 ->where('id_type_fuel', 2)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
         ];

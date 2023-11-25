@@ -37,7 +37,7 @@
                     @guest
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('create-achievements') }}">{{ __('Registrar Logros') }}</a>
+                            <a class="nav-link" href="{{ route('init-achievements') }}">{{ __('Registrar Logros') }}</a>
                         </li>
                         @if(auth()->user()->unidad_usuario->profile === '99')
                             <li class="nav-item">

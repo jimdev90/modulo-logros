@@ -33,23 +33,23 @@ class ReportController extends Controller
         $id_unidad = $request->id_unidad;
         $type_report = $request->type_report;
         $unidad = Unidad::where('id', $request->id_unidad)->first();
-        $criminalGroups = CriminalGroup::whereBetween('created_at', [$date. ' 05:00:00', $dateNext. ' 04:59:59'])
+        $criminalGroups = CriminalGroup::whereBetween('created_at', [$date. ' 06:00:00', $dateNext. ' 05:59:59'])
             ->where('cod_uni1', $request->id_unidad)
             ->get();
 
-        $currencies = Currency::whereBetween('created_at', [$date. ' 05:00:00', $dateNext. ' 04:59:59'])
+        $currencies = Currency::whereBetween('created_at', [$date. ' 06:00:00', $dateNext. ' 05:59:59'])
             ->where('cod_uni1', $request->id_unidad)->get();
-        $drugs = Drug::whereBetween('created_at', [$date. ' 05:00:00', $dateNext. ' 04:59:59'])
+        $drugs = Drug::whereBetween('created_at', [$date. ' 06:00:00', $dateNext. ' 05:59:59'])
             ->where('cod_uni1', $request->id_unidad)->get();
-        $explosives = Explosive::whereBetween('created_at', [$date. ' 05:00:00', $dateNext. ' 04:59:59'])
+        $explosives = Explosive::whereBetween('created_at', [$date. ' 06:00:00', $dateNext. ' 05:59:59'])
             ->where('cod_uni1', $request->id_unidad)->get();
-        $firearms = FireArm::whereBetween('created_at', [$date. ' 05:00:00', $dateNext. ' 04:59:59'])
+        $firearms = FireArm::whereBetween('created_at', [$date. ' 06:00:00', $dateNext. ' 05:59:59'])
             ->where('cod_uni1', $request->id_unidad)->get();
-        $fuels = Fuel::whereBetween('created_at', [$date. ' 05:00:00', $dateNext. ' 04:59:59'])
+        $fuels = Fuel::whereBetween('created_at', [$date. ' 06:00:00', $dateNext. ' 05:59:59'])
             ->where('cod_uni1', $request->id_unidad)->get();
-        $others = Other::whereBetween('created_at', [$date. ' 05:00:00', $dateNext. ' 04:59:59'])
+        $others = Other::whereBetween('created_at', [$date. ' 06:00:00', $dateNext. ' 05:59:59'])
             ->where('cod_uni1', $request->id_unidad)->get();
-        $persons = Person::whereBetween('created_at', [$date. ' 05:00:00', $dateNext. ' 04:59:59'])
+        $persons = Person::whereBetween('created_at', [$date. ' 06:00:00', $dateNext. ' 05:59:59'])
             ->where('cod_uni1', $request->id_unidad)->get();
 
         $dataCountCriminalGroups = DB::select('CALL PA_GET_REPORT_CRIMINAL_GROUP_DATE_UNIDAD(?, ?)', array($date, $id_unidad));

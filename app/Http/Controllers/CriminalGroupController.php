@@ -13,14 +13,14 @@ class CriminalGroupController extends Controller
     {
         $dateNow = now()->format('Y-m-d');
         $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
-        $data = CriminalGroup::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+        $data = CriminalGroup::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
             ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
 
         $dataCount = [
-            "organizacion_criminal" => CriminalGroup::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            "organizacion_criminal" => CriminalGroup::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
                 ->where('id_type_criminal_group', 1)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "banda_criminal" => CriminalGroup::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            "banda_criminal" => CriminalGroup::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
                 ->where('id_type_criminal_group', 2)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
         ];

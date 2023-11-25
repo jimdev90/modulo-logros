@@ -13,19 +13,19 @@ class OthersController extends Controller
     {
         $dateNow = now()->format('Y-m-d');
         $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
-        $data = Other::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+        $data = Other::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
             ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
         $dataCount = [
-            "bienes_muebles_incautados" => Other::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            "bienes_muebles_incautados" => Other::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
                 ->where('id_type_other', 1)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "bienes_inmuebles_incautados" => Other::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            "bienes_inmuebles_incautados" => Other::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
                 ->where('id_type_other', 2)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "madera" => Other::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            "madera" => Other::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
                 ->where('id_type_other', 3)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "mercaderia_contrabando" => Other::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            "mercaderia_contrabando" => Other::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
                 ->where('id_type_other', 4)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
         ];

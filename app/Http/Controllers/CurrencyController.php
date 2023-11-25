@@ -13,19 +13,19 @@ class CurrencyController extends Controller
     {
         $dateNow = now()->format('Y-m-d');
         $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
-        $data = Currency::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+        $data = Currency::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
             ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
         $dataCount = [
-            "nuevos_soles" => Currency::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            "nuevos_soles" => Currency::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
                 ->where('id_type_currency', 1)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "dolares" => Currency::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            "dolares" => Currency::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
                 ->where('id_type_currency', 2)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "euros" => Currency::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            "euros" => Currency::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
                 ->where('id_type_currency', 3)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
-            "pesos" => Currency::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+            "pesos" => Currency::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
                 ->where('id_type_currency', 4)
                 ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->sum('quantity'),
         ];
