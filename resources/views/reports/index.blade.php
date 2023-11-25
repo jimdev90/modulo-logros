@@ -65,7 +65,6 @@
                                                     <label for="id_unidad">Unidad</label>
                                                     <select class="form-control" name="id_unidad" id="id_unidad">
                                                         <option value="">Seleccione...</option>
-                                                        <option value="">CONSOLIDADO GENERAL</option>
                                                         @foreach($unidades as $unidad)
                                                             <option value="{{ $unidad->id }}">{{ $unidad->name }}</option>
                                                         @endforeach
