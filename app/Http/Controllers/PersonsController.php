@@ -21,7 +21,7 @@ class PersonsController extends Controller
             $dateNow = now()->format('Y-m-d');
             $dateNext = date("Y-m-d", strtotime($dateNow . "+ 1 days"));
         }
-        $data = Person::whereBetween('created_at', [$dateNow . ' 05:00:00', $dateNext . ' 04:59:59'])
+        $data = Person::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])
             ->where('cod_uni1', auth()->user()->unidad_usuario->id_unidad)->get();
         $dataCount = [
             "detenidos_extranjero" => Person::whereBetween('created_at', [$dateNow . ' 06:00:00', $dateNext . ' 05:59:59'])

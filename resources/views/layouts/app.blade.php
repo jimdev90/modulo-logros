@@ -14,6 +14,9 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    <!-- bootstrap-icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" rel="stylesheet">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
@@ -38,6 +41,12 @@
                     @else
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('init-achievements') }}">{{ __('Registrar Logros') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="suggestion/1">{{ __('Sugerencias') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="problem/1">{{ __('Problemas') }}</a>
                         </li>
                         @if(auth()->user()->unidad_usuario->profile === '99')
                             <li class="nav-item">
