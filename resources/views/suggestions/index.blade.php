@@ -23,6 +23,7 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Titulo</th>
                                             <th scope="col">Creado por:</th>
+                                            <th scope="col">Unidad</th>
                                             <th scope="col">Fecha</th>
                                             <th scope="col">Acciones</th>
                                         </tr>
@@ -36,6 +37,7 @@
                                                 <th scope="row">{{ $i++ }}</th>
                                                 <td>{{ $suggestion->title }}</td>
                                                 <td>{{ $suggestion->author->nombre }}</td>
+                                                <td>{{ $suggestion->author->unidad_usuario->unidad->name }}</td>
                                                 <td>{{ $suggestion->created_at->diffForHumans() }}</td>
                                                 <td>
                                                     @if($suggestion->author_id === auth()->user()->idusuarios)

@@ -9,7 +9,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header text-center">
-                                    <h3 class="text-center">Editar Sugerencias</h3>
+                                    <h3 class="text-center">Editar Sugerencia</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="row justify-content-center">

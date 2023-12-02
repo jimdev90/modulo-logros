@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('author_id');
             $table->morphs('commentable');
             $table->text('content');
-            $table->boolean('approved')->default(false);
+            $table->boolean('approved')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
