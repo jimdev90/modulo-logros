@@ -10,7 +10,7 @@
             <div class="row align-items-center mb-3">
                 <div class="col">
                     {{ $comment->time_ago }}
-                    <span class="badge bg-{{ $comment->statusClass }}">{{ $comment->status }}"></span>
+                    <span class="badge bg-{{ $comment->statusClass }}">{{ $comment->status }}</span>
                 </div>
                 <div class="col-auto">
                     <a class="btn btn-sm p-1 btn-outline-primary reply" id="reply-{{ $comment->id }}">

@@ -43,10 +43,7 @@
                             <a class="nav-link" href="{{ route('init-achievements') }}">{{ __('Registrar Logros') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="suggestion/1">{{ __('Sugerencias') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="problem/1">{{ __('Problemas') }}</a>
+                            <a class="nav-link" href="{{ route('suggestions.index') }}">{{ __('Sugerencias') }}</a>
                         </li>
                         @if(auth()->user()->unidad_usuario->profile === '99')
                             <li class="nav-item">
@@ -103,6 +100,8 @@
 <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdn.tiny.cloud/1/c0olnvxq06mlhxlz0csogv61gbq001fplk6spukem8ckp37z/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
 @stack('js')
 </body>
 </html>

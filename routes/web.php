@@ -13,6 +13,7 @@ use App\Http\Controllers\OthersController;
 use App\Http\Controllers\FuelController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UnidadUserController;
+use App\Http\Controllers\SuggestionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -108,6 +109,16 @@ Route::group(['middleware' => ['auth', 'profile:1,99']], function () {
     Route::get('/register-others', [OthersController::class, 'index'])->name('register-others');
     Route::post('/register-others', [OthersController::class, 'store'])->name('register-others.store');
     Route::delete('/register-others/{data}', [OthersController::class, 'delete'])->name('register-others.delete');
+
+    Route::get('/suggestions', [SuggestionController::class, 'index'])->name('suggestions.index');
+    Route::post('/suggestions', [SuggestionController::class, 'store'])->name('suggestions.store');
+    Route::get('/suggestions/create', [SuggestionController::class, 'create'])->name('suggestions.create');
+    Route::get('/suggestions/{suggestion}/edit', [SuggestionController::class, 'edit'])->name('suggestions.edit');
+    Route::put('/suggestions/{suggestion}/update', [SuggestionController::class, 'update'])->name('suggestions.update');
+    Route::delete('/suggestions/{suggestion}/delete', [SuggestionController::class, 'delete'])->name('suggestions.delete');
+    Route::get('/suggestions/{id}', [SuggestionController::class, 'show'])->name('suggestion.show');
+
+    Route::post('/suggestions/{id}/comment', [SuggestionController::class, 'storeComments'])->name('suggestions.comment.store');
 
 });
 

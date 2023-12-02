@@ -4,13 +4,16 @@ namespace App\Models;
 
 use App\Traits\Commentable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Suggestion extends Model
 {
-    use Commentable;
+    use Commentable, SoftDeletes;
 
     protected $fillable = [
         'title',
-        'content'
+        'content',
+        'author_id',
+        'slug',
     ];
 }

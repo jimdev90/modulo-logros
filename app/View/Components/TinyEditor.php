@@ -6,14 +6,20 @@ use Illuminate\View\Component;
 
 class TinyEditor extends Component
 {
+    public $editorId;
+    public $name;
+    public $content;
 
     public function __construct(
-        public string $editorId,
-        public string $name,
-        public ?string $content = null,
+        $editorId,
+        $name,
+        $content = null
     )
     {
         //
+        $this->editorId = $editorId;
+        $this->name = $name;
+        $this->content = $content;
     }
 
 
